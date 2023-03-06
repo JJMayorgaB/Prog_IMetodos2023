@@ -33,14 +33,14 @@ double norma(int x){
     std::pair<int, int> result = twinprimes(x); 
     int a = result.first;
     int b = result.second;
-    int c = std::pow(a,2);
-    int d = std::pow(b,2);
+    double c = std::pow(a,2);
+    double d = std::pow(b,2);
 
     return(std::sqrt( c + d ));
 
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 
     std::ofstream fout("norma.txt");
