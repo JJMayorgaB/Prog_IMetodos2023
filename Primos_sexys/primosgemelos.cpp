@@ -46,7 +46,7 @@ int main(void)
     std::ofstream fout("norma.txt");
     int x = 0;
 
-    for (x = 0; x <= 101; x=x+10) {
+    for (x = 0; x <= 101; x=x+20) {
 
         fout << x << "\t" << norma(x) << "\n";
 
