@@ -15,4 +15,23 @@ double sqrt_heron(double x, int n){
 
 }
 
+int main(){
+
+
+    double x = 3141.5926;
+
+    std::ofstream fout("datos.txt");
+
+    for(int n = 1; n <= 20; n++) {
+
+        double r = sqrt_heron(x, n);
+
+        fout << n << "\t" << std::fabs(1 - r/std::sqrt(x)) << std::endl;
+
+    }
+
+    fout.close();
+
+    return 0;
+}
 
