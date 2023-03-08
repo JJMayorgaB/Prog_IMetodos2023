@@ -6,10 +6,12 @@ double sqrt_heron(double x, int n){
 
 // La función nos retorna la raiz cuadrada de x despues de hacer n iteraciones con la aproximación de heron
 
-    double r = 1;
+    double r = 1.0;
 
-    for (int i = 1; i <= n; i++) {
-        r = (r + x/r) / 2;
+    for (int i = 1; i < n; i++) {
+
+        r = 0.5*(r + x/r);
+
     }
     return r;
 
@@ -17,21 +19,11 @@ double sqrt_heron(double x, int n){
 
 int main(){
 
+    std::cout.setf(std::ios::scientific);
 
-    double x = 3141.5926;
+    double x = 3.1415926;
+    double r = sqrt_heron(x, 5);
+    std::cout << r << " " << std::fabs(1 - r/std::sqrt(x)) << std::endl;
 
-    std::ofstream fout("datos.txt");
-
-    for(int n = 1; n <= 20; n++) {
-
-        double r = sqrt_heron(x, n);
-
-        fout << n << "\t" << std::fabs(1 - r/std::sqrt(x)) << std::endl;
-
-    }
-
-    fout.close();
-
-    return 0;
 }
 
