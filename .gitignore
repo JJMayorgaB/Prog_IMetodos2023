@@ -3,4 +3,6 @@
 /norma.txt
 Parcial 1/a.exe
 .vscode/settings.json
-
+*.txt
+*a.exe
+*.pdf
