@@ -10,7 +10,7 @@ int main(int argc, char **argv){
     std::cout.setf(std::ios::scientific);
     std::cout.precision(15);
 
-    double precision = std::stoi(argv[1]); //pedimos la precision para el metodo de newton desde consola se espera que sea 1.0e-15
+    double precision = std::stod(argv[1]); //pedimos la precision para el metodo de newton desde consola se espera que sea 1.0e-15
 
     std::ofstream fout("datos.txt");
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv){
 
         double f0 = 0.316/(std::pow(reynolds,0.25)); //formula de Blasius
 
-        auto colebrook = [D, reynolds](double f){return (2.0*log10((1.4e-6/(3.7*D))+(2.51/(reynolds*std::sqrt(f))))+(1.0/std::sqrt(f)));};
+        auto colebrook = [D, reynolds](double f){return (2.0*log10((1.4e-6/(3.7*D))+(2.51/(reynolds*std::sqrt(f)))))+(1.0/std::sqrt(f));};
         //Funcion lambda para la ecuacion de Colebrook 
 
         double N = newton(f0, precision, colebrook, max, min);
