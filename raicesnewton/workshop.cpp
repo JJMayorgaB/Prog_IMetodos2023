@@ -10,7 +10,7 @@ int main(int argc, char **argv){
     std::cout.setf(std::ios::scientific);
     std::cout.precision(15);
  
-    double precision = 1.0e-5; 
+    double precision = 1.0e-5; //hay que incluir un argv para que pida la precision desde consola y no usar variables globales
 
     std::ofstream fout("datos.txt");
 
@@ -33,6 +33,7 @@ int main(int argc, char **argv){
         auto presion = [N,D](){return(N*(0.2*1.23*2025/2*D));};
         double result = presion();
 
+        fout.precision(15);
         fout << std::scientific;
         fout << D << "\t" << result << "\n";
         //Se guardan en un archivo .txt la friccion y el diametro 
