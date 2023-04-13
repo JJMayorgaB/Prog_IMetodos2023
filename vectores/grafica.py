@@ -45,4 +45,4 @@ ax.spines['right'].set_linewidth(1.5)
 
 plt.show()
 
-fig.savefig("fig_datos.pdf",bbox_inches='tight')
+fig.savefig("stats.pdf",bbox_inches='tight')
