@@ -7,7 +7,7 @@
 
 void lim_vector(std::vector<double>& v, double& val_min, double& val_max);
 std::vector<double> histograma(std::vector<double>& v, double& val_min, double& val_max, int N);
-std::vector<double> pdf(std::vector<double>& v, double& val_min, double& val_max, int N);
+std::vector<double> pdf(std::vector<double>& v, int& data_size, double& val_min, double& val_max, int N);
 std::vector<double> cdf(std::vector<double> pdf, double& val_min, double& val_max, int N);
 std::vector<double> x_func(double& val_min, double& val_max, int N);
 
@@ -32,9 +32,10 @@ int main(int argc, char **argv){
 
     double min, max;
     lim_vector(xdata, min,  max);
-    std::vector<double> hist = histograma(xdata, min, max, N); //se pueden añadir las funciones histograma y lim_vector como argumentos mediante templates a las demas funciones pero no pude hacerlo con una funcion que retornaba un vector
+    std::vector<double> hist = histograma(xdata, min, max, N);
 
-    std::vector<double> prob_func = pdf(hist, min, max, N);
+    int size = xdata.size();
+    std::vector<double> prob_func = pdf(hist, size, min, max, N);
 
     std::vector<double> cum_func = cdf(prob_func, min, max, N);
 
@@ -95,11 +96,9 @@ std::vector<double> histograma(std::vector<double>& v, double& val_min, double& 
     return hist;
 }
 
-std::vector<double> pdf(std::vector<double>& v, double& val_min, double& val_max, int N){
+std::vector<double> pdf(std::vector<double>& v, int& data_size, double& val_min, double& val_max, int N){
 
     std::vector<double> pdf(N, 0.0);
-
-    int data_size = v.size();
 
     double delta_x = (val_max - val_min) / N;
 
