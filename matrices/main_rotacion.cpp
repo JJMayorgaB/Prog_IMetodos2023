@@ -9,6 +9,23 @@ std::vector<double> rotation(std::vector<double> v, std::vector<double> theta);
 
 int main(int argc, char **argv){
 
+    //Control de errores en caso de no brindar suficientes o ningun argumento
+    if (argc < 2) {
+        std::cerr << "Error. Usage: No Argument Provided\n";
+        return 1;
+   }
+
+    if (argc != 7) {
+        std::cerr << "Error. Usage: Enough Arguments Not Supplied\n"
+                  << argv[1] << " vx \n"
+                  << argv[2] << " vy \n"
+                  << argv[3] << " vz \n"
+                  << argv[4] << " thetax \n"
+                  << argv[5] << " thetay \n"
+                  << argv[6] << " thetaz \n";
+        return 1;
+    }
+
     //Se declaran los valores de nuestro vector y los angulos de rotacion
     double vx = std::stod(argv[1]);
     double vy = std::stod(argv[2]);
