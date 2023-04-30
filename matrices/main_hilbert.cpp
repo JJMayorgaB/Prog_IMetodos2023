@@ -1,5 +1,10 @@
 #include "matrix.h"
 
+// Mayorga Bonilla, Juan José
+// Acero Vargas, Nicolás
+// Quintero Naranjo, Andres Felipe
+// Cuadrado Palencia, Elias
+
 int main(int argc, char **argv) {
     // read size of matrix
     if (argc != 2) {
@@ -22,6 +27,7 @@ int main(int argc, char **argv) {
 
     // print matrix
     print_matrix(A, M, M);
+    
     // print trace
     std::cout << "Trace: " << trace << "\n";
 
