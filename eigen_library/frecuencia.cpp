@@ -57,7 +57,7 @@ std::vector<double> solvesystem(double k, double m1, double m2)
     Eigen::VectorXcd evals = A.eigenvalues();
 
     // Calculamos las frecuencias
-    std::vector<double> frecuencias = {std::sqrt(std::real(evals[0])), std::sqrt(std::real(evals[1]))};
+    std::vector<double> frecuencias = {(std::real(evals[0])), (std::real(evals[1]))};
 
     return frecuencias;
 }
