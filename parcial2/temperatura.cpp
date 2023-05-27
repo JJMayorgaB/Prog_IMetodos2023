@@ -1,16 +1,19 @@
 #include<iostream>
 #include<cmath>
 #include<vector>
+#include<cstdlib>
 #include<random>
+#include<string>
+#include <fstream>
 
-void init_plate(std::vector<double> M, int seed);
-void average_temp_per_row(std::vector<double> M, int rows, int cols, std::vector<double> average_per_col);
+void init_plate(std::vector<double>& A, int semilla);
+void average_temp_per_row(std::vector<double>& A, int rows, int cols, std::vector<double>& average_per_col);
 
-int main(){
+int main(int argc, char **argv){
 
-    const int nrows = 10;
-    const int ncol = 10;
-    const int seed = 0;
+    const int nrows = std::stoi(argv[1]);
+    const int ncol = std::stoi(argv[2]);
+    const int seed = std::stoi(argv[3]);
 
     std::vector<double> m(nrows*ncol);
     std::vector<double> average_per_col(ncol);
@@ -29,34 +32,34 @@ int main(){
 }
 
 
-void init_plate(std::vector<double> M, int seed){
+void init_plate(std::vector<double>& A, int semilla){
     
-    std::mt19937 rng(seed);
-    std::uniform_real_distribution<double> dist(1.5, 5.5);
+    std::mt19937 rango(semilla);
+    std::uniform_real_distribution<double> dist_uniforme(1.5, 5.5);
 
-    for (int i = 0; i < M.size(); ++i) {
+    for (int ii = 0; ii < A.size(); ++ii) {
 
-        M[i] = dist(rng);
+        A[ii] = dist_uniforme(rango);
 
     }
 
 }
 
 
-void average_temp_per_row(std::vector<double> M, int rows, int cols, std::vector<double> average_per_col){
+void average_temp_per_row(std::vector<double>& A, int rows, int cols, std::vector<double>& average_per_col){
 
-    for (int icol = 0; icol < cols; icol++) {
+    for (int ii = 0; ii < cols; ii++) {
 
         double sum = 0.0;
 
-        for (int irow = 0; irow < rows; irow++) {
+        for (int jj = 0; jj < rows; jj++) {
 
-            sum += M[irow * cols + icol];
+            sum += A[jj * cols + ii];
 
         }
 
-        average_per_col[icol] = sum / rows;
-        
+        average_per_col[ii] = sum / rows;
+
     }
 
 
