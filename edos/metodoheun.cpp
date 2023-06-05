@@ -34,12 +34,12 @@ int main(int argc, char** argv) {
 
     state_t sh(2);
 
-    sh[0] = 1.2347;
+    sh[0] = 0.2347;
     sh[1] = 0.0;
 
     state_t se(2);
 
-    se[0] = 1.2347;
+    se[0] = 0.2347;
     se[1] = 0.0;
 
     heun(sh, t0, tf, delta_t, omega);
@@ -65,7 +65,7 @@ void integrate_euler(state_t & s, double ta, double tb, double dt, double omega)
 
         auto deriv = [s, omega](state_t &dsdt){
                 dsdt[0] = s[1];
-                dsdt[1] = -(omega*omega)*s[0]+s[1];
+                dsdt[1] = -(omega*omega)*s[0];
         };
 
         deriv(dsdt);
@@ -93,7 +93,7 @@ void heun(state_t& s, double t0, double tf, double delta_t, double omega){
         auto fderiv = [s, omega](state_t &dsdt){
 
                 dsdt[0] = s[1];
-                dsdt[1] = -(omega*omega)*s[0]+s[1];
+                dsdt[1] = -(omega*omega)*s[0];
 
         };
 

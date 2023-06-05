@@ -4,13 +4,13 @@ import numpy as np
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-t, xe, ve  = np.loadtxt("euler_solution.txt", unpack=True)
-t, xh, vh  = np.loadtxt("heun_solution.txt", unpack=True)
+te, xe, ve  = np.loadtxt("euler_solution.txt", unpack=True)
+th, xh, vh  = np.loadtxt("heun_solution.txt", unpack=True)
 
 fig, ax = plt.subplots()
 
-ax.plot(xh, vh, color='red', marker='.',  linestyle='', label=r"$v(x)$ con el metodo de Heun")
-ax.plot(xe, ve, color='blue', linestyle='--', label=r"$v(x)$ con el metodo de Euler")
+ax.plot(vh, xh, color='red', marker='.',  linestyle='', label=r"$v(x)$ con el metodo de Heun")
+ax.plot(ve, xe, color='blue', linestyle='--', label=r"$v(x)$ con el metodo de Euler")
 
 ax.set_xlabel(r"\boldmath{$x$} \boldmath{$[m]$}", fontsize=16)
 ax.set_ylabel(r'\boldmath{$v(x)$ \boldmath{$[m/s]$}', fontsize=16)
