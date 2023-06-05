@@ -58,7 +58,7 @@ void lorenz_cuda(const state_type& x, state_type& dxdt, double t)
 int main(){
 
     // Vector de condiciones iniciales
-    state_type x0(N);
+    state_type x0(size_t N);
 
     // Configurar el rango de integración (por ejemplo, de 0 a 1)
     double t_start = 0.0;
