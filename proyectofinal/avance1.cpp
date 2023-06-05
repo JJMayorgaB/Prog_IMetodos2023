@@ -25,7 +25,8 @@ void lorenz( const state_type &x , state_type &dxdt , double t )
 
 //3.Definir las condiciones iniciales y el rango de integración:
 
-state_type x0(N); // Vector de condiciones iniciales
+// Vector de condiciones iniciales
+state_type x0(N);
 
 // Configurar el rango de integración (por ejemplo, de 0 a 1)
 double t_start = 0.0;
@@ -33,4 +34,4 @@ double t_end = 1.0;
 double dt = 0.01;
 
 //4.Resolver el sistema de ecuaciones utilizando Odeint y CUDA:
-odeint::integrate_const(stepper_type(), system(), x0, t_start, t_end, dt);
+odeint::integrate_const(stepper_type(), lorenz, x0, t_start, t_end, dt);
