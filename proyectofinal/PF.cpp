@@ -1,6 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <valarray>
+#include <cmath>
+#include <string>
+#include <fstream>
+#include<chrono>
+
 #include <boost/numeric/odeint.hpp>
 
 // Define the type for the state vector
@@ -8,31 +13,42 @@ typedef std::valarray<double> state_type;
 
 void coupled_oscillator(const state_type& x, state_type& dxdt, const double &k, const double &m, const double &friction_coefficient);
 double total_menergy(const state_type& x, const double &k, const double &m );
-state_type uniform_initcond(const size_t &M, const double &x0 const double &v0);
+state_type uniform_initcond(const size_t &M, const double &x0, const double &v0);
 state_type random_initcond(const size_t &M, const int &semilla);
+void integration_energy(const double &initial_energy, state_type init_cond, double &dt);
 
-int main()
-{
-    const size_t M = 10;  // Number of masses
+int main(int argc, char** argv)
+{   
+    const size_t M = 100;  // Final number of masses
 
-    // Define the initial conditions
-    state_type int_cond = uniform_initcond(M, 0.0, 10.0);
+    for (size_t i = 0; i <= M; i++){
 
-    // Define the time span
-    double t_start = 0.0;
-    double t_end = 500.0;
-    double dt = 0.01;
+        // Definimos la masa
+        state_type m = 100/M;
 
-    // Integrate the coupled oscillator system
-    boost::numeric::odeint::integrate(coupled_oscillator, int_cond, t_start, t_end, dt);
+        // Define the initial conditions
+        state_type int_cond = uniform_initcond(M, 0.0, 10.0);
+        
+        // Define the time separation
+        double dt = 0.01;
 
-    // Print the results
-    for (size_t i = 0; i < M; ++i)
-    {
-        std::cout << "Mass " << i + 1 << ":\n";
-        std::cout << "Position: " << int_cond[2 * i] << std::endl;
-        std::cout << "Velocity: " << int_cond[2 * i + 1] << std::endl;
-        std::cout << std::endl;
+        state_type dxdt(2 * M);
+
+        coupled_oscillator(int_cond, dxdt, 1.0, m, 0.5); //k=1, mu=0.5
+
+        double energia_total = total_menergy(int_cond, 1.0, m); //k=1
+
+        std::ofstream fout("time.txt");
+
+         auto start = std::chrono::high_resolution_clock::now();
+        // Integrate the coupled oscillator system
+        integration_energy(energia_total, int_cond, dt);
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+
+        fout << "Number of masses" << "\t" << M << "\t" << "Time" << duration.count() << "\n";
+
     }
 
     return 0;
@@ -101,3 +117,22 @@ state_type random_initcond(const size_t &M, const int &semilla){
     return init_conditions;
 
 }
+
+void integration_energy(const double &initial_energy, state_type init_cond, double &dt){
+
+    double target_energy = initial_energy / 50.0;  // Establecer la energía objetivo
+
+    double current_energy = initial_energy;  // Energía actual del sistema
+
+    while (current_energy > target_energy)
+    {   
+        double t_start = 0;
+        double t_end = t_start + dt;
+        boost::numeric::odeint::integrate(coupled_oscillator, init_cond, t_start, t_end, dt);  // Integrar el sistema
+
+        current_energy = total_menergy(int_cond, 1.0, 1.0);  // Calcular la energía actual del sistema
+        t_start = t_end;  // Actualizar el tiempo de inicio para la próxima integración
+        t_end += dt;  // Incrementar el tiempo final para la próxima integración
+    }
+
+}   
