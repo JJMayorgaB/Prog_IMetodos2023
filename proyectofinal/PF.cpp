@@ -15,13 +15,13 @@ void coupled_oscillator(const state_type& x, state_type& dxdt, const double &k, 
 double total_menergy(const state_type& x, const double &k, const double &m );
 state_type uniform_initcond(const size_t &M, const double &x0, const double &v0);
 state_type random_initcond(const size_t &M, const int &semilla);
-void integration_energy(const double &initial_energy, state_type init_cond, double &dt);
+void integration_energy(const double &initial_energy, state_type &init_cond, double &dt);
 
 int main(int argc, char** argv)
 {   
     const size_t M = 100;  // Final number of masses
 
-    for (size_t i = 0; i <= M; i++){
+    for (size_t i = 0; i < M; i++){
 
         // Definimos la masa
         state_type m = 100/M;
@@ -118,16 +118,18 @@ state_type random_initcond(const size_t &M, const int &semilla){
 
 }
 
-void integration_energy(const double &initial_energy, state_type init_cond, double &dt){
+void integration_energy(const double &initial_energy, state_type &init_cond, double &dt){
 
     double target_energy = initial_energy / 50.0;  // Establecer la energía objetivo
 
     double current_energy = initial_energy;  // Energía actual del sistema
 
+    double t_start = 0;
+    double t_end = t_start + dt;
+
     while (current_energy > target_energy)
     {   
-        double t_start = 0;
-        double t_end = t_start + dt;
+        
         boost::numeric::odeint::integrate(coupled_oscillator, init_cond, t_start, t_end, dt);  // Integrar el sistema
 
         current_energy = total_menergy(int_cond, 1.0, 1.0);  // Calcular la energía actual del sistema
