@@ -1,11 +1,8 @@
 #include <iostream>
-#include <vector>
-#include <valarray>
 #include <cmath>
 #include <string>
 #include <fstream>
 #include <chrono>
-#include <random>
 
 #include "osc_acop.h"
 

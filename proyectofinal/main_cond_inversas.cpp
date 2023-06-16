@@ -1,10 +1,8 @@
 #include <iostream>
-#include <vector>
 #include <cmath>
 #include <string>
 #include <fstream>
 #include <chrono>
-#include <random>
 
 #include "osc_acop.h"
 
