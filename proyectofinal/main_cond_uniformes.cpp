@@ -21,7 +21,7 @@ int main(int argc, char** argv)
         const double cf = 0.5;
 
         // Define the initial conditions
-        state_type cond_ini = random_initcond(M, 12345);
+        state_type cond_ini = uniform_initcond(M, 0.0, 10.0);
         
         // Define the time separation
         double dt = 0.01;
