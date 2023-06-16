@@ -17,6 +17,7 @@ double total_menergy(const state_type& x, const double &k, const double &m );
 state_type uniform_initcond(const int &M, const double &x0, const double &v0);
 state_type random_initcond(const int &M, const int &semilla);
 void integration_energy(const double &initial_energy, state_type &init_cond, double &dt, const double m, const double k, const double cf);
+state_type inv_initcond(const int &M, const double &x0, const double &v0);
 
 int main(int argc, char** argv)
 {   
@@ -31,7 +32,7 @@ int main(int argc, char** argv)
         const double cf = 0.5;
 
         // Define the initial conditions
-        state_type cond_ini = random_initcond(i, 12345);
+        state_type cond_ini = inv_initcond(i, 0.5, 5);
         
         // Define the time separation
         double dt = 0.01;
