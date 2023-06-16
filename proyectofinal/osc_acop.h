@@ -1,6 +1,8 @@
 #pragma once
 
 #include <boost/numeric/odeint.hpp>
+#include <random>
+#include <vector>
 
 // Define the type for the state vector
 typedef std::vector<double> state_type;
